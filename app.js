@@ -15,8 +15,9 @@ app.use('/', userRouter);
 app.use((req, res, next) => {
   const error = new Error('Not found');
   res.status(404);
+  res.contentType('JSON');
   error.status = 404;
-  res.send({ "message": "Запрашиваемый ресурс не найден" });
+  res.send({ message: 'Запрашиваемый ресурс не найден' });
   next();
 });
 
