@@ -9,6 +9,13 @@ userRouter.get('/users/:id', (req, res) => {
     .then((data) => {
       const users = JSON.parse(data);
       const user = users.filter((item) => item._id === req.params.id);
+
+      if (user.length === 0) {
+        res.status(404);
+        res.send({ error: 'Такого пользователя нет' });
+        return;
+      }
+
       res.status(200);
       res.contentType('JSON');
       res.send(user);
